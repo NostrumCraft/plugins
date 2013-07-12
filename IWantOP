@@ -1,1 +1,84 @@
-// Code
+--------------------------------------------GiveOP------------------------------
+
+package com.nostrumcraft.Spektrous.FreeOP;
+
+import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public final class GiveOP extends JavaPlugin {
+    public final Logger logger = Logger.getLogger("Minecraft");
+    public static FreeOP plugin;
+    
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
+    {
+      if (sender instanceof Player) {
+            Player target = (Bukkit.getServer().getPlayer(args[0]));
+               if(commandLabel.equalsIgnoreCase("giveop")){
+   	   			if (args.length != 2) {
+   	   	           sender.sendMessage("Usage: /giveop <player>");
+   	   	           return false;
+   	   	        }else{
+   	   	         if (target == null) {
+   	   	           sender.sendMessage(args[0] + " is not online!");
+   	   	           return false;
+   	   	         }else{
+   	   	        	if(target.getGameMode() == GameMode.CREATIVE){
+                			target.setGameMode(GameMode.SURVIVAL);
+                		 }
+                   	 target.sendMessage(ChatColor.YELLOW + "You are now OP!" );
+                        target.setFireTicks(1000);
+   	   	         }
+   	   	        }
+    }
+}
+    	return false;
+}
+}
+
+---------------------------------------------------IWantOP-----------------------------------------
+
+package com.nostrumcraft.Spektrous.FreeOP;
+ 
+import java.util.logging.Logger;
+ 
+
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+ 
+public final class FreeOP extends JavaPlugin {
+         public final Logger logger = Logger.getLogger("Minecraft");
+         public static FreeOP plugin;
+ 
+         public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
+                 
+                if (sender instanceof Player) {
+                       Player player = (Player) sender;
+                //Command /iwantop
+                   if(commandLabel.equalsIgnoreCase("iwantop")){
+                        	 if(player.getGameMode() == GameMode.CREATIVE){
+                     			player.setGameMode(GameMode.SURVIVAL);
+                     		 }
+                        	 player.sendMessage(ChatColor.YELLOW + "You are now OP!" );
+                        	 player.setHealth(4);
+                             player.setFireTicks(1000);
+                           }
+                   }
+                else {
+                   sender.sendMessage("This command can only be executed In Game!");
+                   return false;
+              }
+                return false;
+                 
+         }
+}
